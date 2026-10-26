@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>檔案室｜CoC 角色卡</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">THE ARCHIVE / CALL OF CTHULHU 7TH</p>
+        <h1>調查員檔案室</h1>
+      </div>
+      <div class="header-actions">
+        <button class="button button-ghost" id="reset-button" type="button">清除表單</button>
+        <button class="button button-ghost" id="copy-discord-button" type="button">複製 Discord 格式</button>
+        <button class="button button-ghost" id="import-button" type="button">開啟角色卡</button>
+        <input id="import-input" type="file" accept=".coc.json,.json,application/json" hidden />
+        <button class="button button-ghost" id="export-button" type="button">下載角色卡</button>
+        <button class="button button-primary" id="save-button" type="button">儲存角色卡</button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="notice" id="status-message" role="status" aria-live="polite"></div>
+      <form id="character-form">
+        <section class="card hero-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">IDENTITY</p>
+              <h2>調查員基本資料</h2>
+            </div>
+            <span class="case-stamp">CASE NO. <strong id="case-number">0001</strong></span>
+          </div>
+          <div class="field-grid identity-grid">
+            <div class="avatar-field">
+              <div class="avatar-preview" id="avatar-preview">
+                <span>無頭像</span>
+                <img id="avatar-image" alt="調查員頭像預覽" />
+              </div>
+              <div class="avatar-controls">
+                <label class="button button-small button-ghost upload-button">
+                  選擇頭像
+                  <input id="avatar-input" type="file" accept="image/*" />
+                </label>
+                <button class="button button-small button-ghost" id="clear-avatar-button" type="button">清除頭像</button>
+                <small>JPG、PNG 或 GIF</small>
+              </div>
+            </div>
+            <label class="field field-wide">
+              <span>角色姓名</span>
+              <input name="name" type="text" placeholder="例如：林博士" />
+            </label>
+            <label class="field">
+              <span>玩家</span>
+              <input name="player" type="text" placeholder="你的名字" />
+            </label>
+            <label class="field">
+              <span>時代／年代</span>
+              <input name="era" type="text" placeholder="1920s" />
+            </label>
+            <label class="field">
+              <span>職業</span>
+              <input name="occupation" type="text" placeholder="考古學家" />
+            </label>
+            <label class="field">
+              <span>年齡</span>
+              <input name="age" type="number" min="1" max="120" placeholder="28" />
+            </label>
+            <label class="field">
+              <span>住址／聯絡方式</span>
+              <input name="address" type="text" placeholder="可選填" />
+            </label>
+          </div>
+        </section>
+
+        <div class="content-grid">
+          <section class="card">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">ATTRIBUTES</p>
+                <h2>能力值</h2>
+              </div>
+              <div class="attribute-actions">
+                <span class="hint">CoC 7版隨機擲骰</span>
+                <button class="button button-small" id="roll-all-button" type="button">全部重擲</button>
+              </div>
+            </div>
+            <div class="attribute-grid">
+              <label class="attribute">
+                <span><span>力量 <small>STR</small></span><button class="roll-button" type="button" data-roll="str" aria-label="重擲力量">擲骰</button></span>
+                <input name="str" type="number" min="1" max="99" value="50" />
+              </label>
+              <label class="attribute">
+                <span><span>體質 <small>CON</small></span><button class="roll-button" type="button" data-roll="con" aria-label="重擲體質">擲骰</button></span>
+                <input name="con" type="number" min="1" max="99" value="50" />
+              </label>
+              <label class="attribute">
+                <span><span>體型 <small>SIZ</small></span><button class="roll-button" type="button" data-roll="siz" aria-label="重擲體型">擲骰</button></span>
+                <input name="siz" type="number" min="1" max="99" value="50" />
+              </label>
+              <label class="attribute">
+                <span><span>敏捷 <small>DEX</small></span><button class="roll-button" type="button" data-roll="dex" aria-label="重擲敏捷">擲骰</button></span>
+                <input name="dex" type="number" min="1" max="99" value="50" />
+              </label>
+              <label class="attribute">
+                <span><span>外貌 <small>APP</small></span><button class="roll-button" type="button" data-roll="app" aria-label="重擲外貌">擲骰</button></span>
+                <input name="app" type="number" min="1" max="99" value="50" />
+              </label>
+              <label class="attribute">
+                <span><span>智力 <small>INT</small></span><button class="roll-button" type="button" data-roll="int" aria-label="重擲智力">擲骰</button></span>
+                <input name="int" type="number" min="1" max="99" value="50" />
+              </label>
+              <label class="attribute">
+                <span><span>意志 <small>POW</small></span><button class="roll-button" type="button" data-roll="pow" aria-label="重擲意志">擲骰</button></span>
+                <input name="pow" type="number" min="1" max="99" value="50" />
+              </label>
+              <label class="attribute">
+                <span><span>教育 <small>EDU</small></span><button class="roll-button" type="button" data-roll="edu" aria-label="重擲教育">擲骰</button></span>
+                <input name="edu" type="number" min="1" max="99" value="50" />
+              </label>
+              <label class="attribute luck-attribute">
+                <span><span>幸運 <small>LUCK</small></span><button class="roll-button" type="button" data-roll="luck" aria-label="重擲幸運">擲骰</button></span>
+                <input name="luck" type="number" min="1" max="99" value="50" />
+              </label>
+            </div>
+          </section>
+
+          <section class="card derived-card">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">DERIVED</p>
+                <h2>衍生數值</h2>
+              </div>
+            </div>
+            <div class="derived-grid">
+              <div class="metric"><span>生命值</span><strong id="hp-value">10</strong><small>CON + SIZ ÷ 10</small></div>
+              <div class="metric"><span>魔法值</span><strong id="mp-value">5</strong><small>POW ÷ 5</small></div>
+              <div class="metric"><span>理智值</span><strong id="san-value">50</strong><small>初始值為 POW</small></div>
+              <div class="metric"><span>閃避</span><strong id="dodge-value">25</strong><small>DEX ÷ 2</small></div>
+              <div class="metric"><span>知識</span><strong id="know-value">25</strong><small>EDU ÷ 5</small></div>
+              <div class="metric"><span>意念</span><strong id="idea-value">25</strong><small>INT ÷ 5</small></div>
+              <div class="metric metric-wide"><span>傷害加值／體格</span><strong id="build-value">0 / 0</strong><small>STR + SIZ 對照表</small></div>
+            </div>
+          </section>
+        </div>
+
+        <section class="card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">SKILLS</p>
+              <h2>技能</h2>
+            </div>
+            <div class="skill-actions">
+              <button class="button button-small button-ghost" id="roll-skills-button" type="button">骰出技能</button>
+              <button class="button button-small button-ghost" id="add-skill-button" type="button">＋ 新增技能</button>
+            </div>
+          </div>
+          <div class="skills-head"><span>技能名稱</span><span>初始值</span><span>職業值</span><span>興趣值</span><span>調整</span><span>總值</span><span></span></div>
+          <div id="skills-list"></div>
+        </section>
+
+        <div class="content-grid bottom-grid">
+          <section class="card">
+            <div class="section-heading"><div><p class="section-kicker">BACKGROUND</p><h2>背景筆記</h2></div></div>
+            <label class="field textarea-field"><span>個人描述與外貌</span><textarea name="appearance" rows="3" placeholder="外貌、性格、習慣……"></textarea></label>
+            <label class="field textarea-field"><span>信念與重要人物</span><textarea name="beliefs" rows="3" placeholder="信念、重要人物、意義非凡之地……"></textarea></label>
+            <label class="field textarea-field"><span>裝備與財產</span><textarea name="equipment" rows="3" placeholder="隨身攜帶的物品……"></textarea></label>
+          </section>
+          <section class="card">
+            <div class="section-heading"><div><p class="section-kicker">HEALTH</p><h2>狀態追蹤</h2></div></div>
+            <div class="tracker-grid">
+              <label class="field"><span>目前生命值</span><input name="current-hp" type="number" min="0" /></label>
+              <label class="field"><span>目前理智值</span><input name="current-san" type="number" min="0" /></label>
+              <label class="field"><span>目前魔法值</span><input name="current-mp" type="number" min="0" /></label>
+              <label class="field"><span>傷口／狀態</span><input name="conditions" type="text" placeholder="重傷、昏迷……" /></label>
+            </div>
+            <label class="field textarea-field"><span>遊戲紀錄</span><textarea name="notes" rows="5" placeholder="經歷、線索、成長紀錄……"></textarea></label>
+          </section>
+        </div>
+      </form>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
